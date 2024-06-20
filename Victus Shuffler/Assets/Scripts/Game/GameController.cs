@@ -44,7 +44,16 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject winPanel;
     [SerializeField] private TextMeshProUGUI winTimerText;
 
+    [Header("Audio")]
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioCorrect;
+    [SerializeField] private AudioClip audioIncorrect;
+    [SerializeField] private AudioClip audioWin;
+    [SerializeField] private AudioClip audioLose;
+
     private GameManager gameManager;
+    private RecordsManager recordsManager;
+
     private int hearths;
 
     private List<UIGameCard> allCards;
@@ -82,16 +91,21 @@ public class GameController : MonoBehaviour
 
             if (hearths <= 0)
             {
+                recordsManager.SetRecord(gameManager.Dificulty, timer);
+
                 losePanel.SetActive(true);
                 loseTimerText.text = timer.ToString();
+                audioSource.clip = audioLose;
+                audioSource.Play();
             }
         }
     }
 
     [Inject]
-    private void Construct(GameManager gameManager)
+    private void Construct(GameManager gameManager, RecordsManager recordsManager)
     {
         this.gameManager = gameManager; 
+        this.recordsManager = recordsManager;
     }
 
     private void Start()
@@ -217,16 +231,24 @@ public class GameController : MonoBehaviour
         if (gameCard.CardFront != searchSprite)
         {
             Hearths--;
+            audioSource.clip = audioIncorrect;
+            audioSource.Play();
         }
         else
         {
             gameCard.Win();
             winCount++;
+            audioSource.clip = audioCorrect;
+            audioSource.Play();
 
             if (winCount >= allCards.Count)
             {
+                recordsManager.SetRecord(gameManager.Dificulty, timer);
+
                 winPanel.SetActive(true);
                 winTimerText.text = timer.ToString();
+                audioSource.clip = audioWin;
+                audioSource.Play();
             }
         }
     }
