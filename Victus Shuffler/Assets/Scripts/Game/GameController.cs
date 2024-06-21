@@ -9,7 +9,7 @@ using Zenject;
 public class GameController : MonoBehaviour
 {
     [SerializeField] private Sprite defaultCardIcon;
-    [SerializeField] private Sprite[] allCardIcons;
+    [SerializeField] private List<Sprite> allCardIcons;
 
     [Space]
     [SerializeField] private TextMeshProUGUI shuffleTimer;
@@ -50,6 +50,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip audioIncorrect;
     [SerializeField] private AudioClip audioWin;
     [SerializeField] private AudioClip audioLose;
+    [SerializeField] private AudioClip audioStart;
 
     private GameManager gameManager;
     private RecordsManager recordsManager;
@@ -66,8 +67,8 @@ public class GameController : MonoBehaviour
 
         switch (gameManager.Dificulty)
         {
-            case GameDificulty.Begginer: shuffleTime = 12; break;
-            case GameDificulty.Advanced: shuffleTime = 8; break;
+            case GameDificulty.Begginer: shuffleTime = 15; break;
+            case GameDificulty.Advanced: shuffleTime = 10; break;
             case GameDificulty.Pro: shuffleTime = 5; break;
         }
 
@@ -110,6 +111,9 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        audioSource.clip = audioStart;
+        audioSource.Play();
+
         losePanel.SetActive(false);
         winPanel.SetActive(false);
 
@@ -121,7 +125,6 @@ public class GameController : MonoBehaviour
         allCards = new List<UIGameCard>();
 
         StartCoroutine(EStartGame());
-        StartCoroutine(EStartTimer());
     }
 
     private void OnDestroy()
@@ -150,26 +153,30 @@ public class GameController : MonoBehaviour
         {
             UIGameCard newCard = Instantiate(cardPrefab, cardsContent);
             newCard.SetBG(defaultCardIcon);
-            newCard.SetFront(allCardIcons[Random.Range(0, allCardIcons.Length)]);
+            Sprite cardFront = allCardIcons[Random.Range(0, allCardIcons.Count)];
+            newCard.SetFront(cardFront);
+            allCardIcons.Remove(cardFront);
             allCards.Add(newCard);
             newCard.ChangeSprite(false, false);
 
             newCard.onCardClick += OnCardClick;
 
-            yield return new WaitForSeconds(cardSpawnDelay);
+            yield return new WaitForSeconds(0);
         }
 
+        shuffleTimer.text = $"SHUFFLE IN: {0}";
         grid.enabled = false;
 
-        for (int i = (int)ShuffleTime(); i >= 0; i--)
+        for (int i = 10; i >= 0; i--)
         {
-            shuffleTimer.text = $"SHUFFLE IN: {i}";
+            timeTimer.text = $"TIME: {i}";
             yield return new WaitForSeconds(1);
         }
 
         foreach (UIGameCard card in allCards)
         {
             card.ChangeSprite(true, true);
+            yield return new WaitForSeconds(cardSpawnDelay);
         }
 
         searchSprite = allCards[Random.Range(0, allCards.Count)].CardFront;
@@ -178,6 +185,7 @@ public class GameController : MonoBehaviour
 
         rememberObj.SetActive(false);
         StartCoroutine(EShuffle());
+        StartCoroutine(EStartTimer());
     }
 
     private IEnumerator EStartTimer()
@@ -208,6 +216,7 @@ public class GameController : MonoBehaviour
 
             card.ChangeSprite(true, false);
             cardPositions.Add(card.transform.position);
+            yield return new WaitForSeconds(cardSpawnDelay);
         }
 
         for (int i = 0; i < allCards.Count; i++)
@@ -233,6 +242,8 @@ public class GameController : MonoBehaviour
             Hearths--;
             audioSource.clip = audioIncorrect;
             audioSource.Play();
+
+            StartCoroutine(EDropCard(gameCard));
         }
         else
         {
@@ -251,5 +262,11 @@ public class GameController : MonoBehaviour
                 audioSource.Play();
             }
         }
+    }
+
+    private IEnumerator EDropCard(UIGameCard card)
+    {
+        yield return new WaitForSeconds(1);
+        card.ChangeSprite(true, true);
     }
 }
