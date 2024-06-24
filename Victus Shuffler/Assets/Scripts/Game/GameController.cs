@@ -281,7 +281,7 @@ public class GameController : MonoBehaviour
 
     private IEnumerator EDropCard(UIGameCard card)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(10);
         card.ChangeSprite(true, true);
         audioSource.clip = audioIncorrect;
         audioSource.Play();
