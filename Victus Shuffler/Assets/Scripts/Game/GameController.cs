@@ -161,10 +161,11 @@ public class GameController : MonoBehaviour
 
             newCard.onCardClick += OnCardClick;
 
-            yield return new WaitForSeconds(0);
+            //yield return new WaitForSeconds(0);
         }
 
         shuffleTimer.text = $"SHUFFLE IN: {0}";
+        yield return new WaitForSeconds(1);
         grid.enabled = false;
 
         for (int i = 10; i >= 0; i--)
@@ -209,22 +210,30 @@ public class GameController : MonoBehaviour
         }
 
         List<Vector3> cardPositions = new List<Vector3>();
+        List<UIGameCard> shuffleCards = allCards.GetRange(0, allCards.Count);
+        int removeCount = allCards.Count - 3;
 
-        foreach (UIGameCard card in allCards)
+        for (int i = 0; i < removeCount; i++)
+        {
+            shuffleCards.RemoveAt(Random.Range(0, shuffleCards.Count));
+        }
+
+        foreach (UIGameCard card in shuffleCards)
         {
             if (card.IsWin) continue;
 
             card.ChangeSprite(true, false);
             cardPositions.Add(card.transform.position);
+
             yield return new WaitForSeconds(cardSpawnDelay);
         }
 
-        for (int i = 0; i < allCards.Count; i++)
+        for (int i = 0; i < shuffleCards.Count; i++)
         {
-            if (allCards[i].IsWin) continue;
+            if (shuffleCards[i].IsWin) continue;
 
             int posIndex = Random.Range(0, cardPositions.Count);
-            allCards[i].transform.DOMove(cardPositions[posIndex], shuffleMoveTime);
+            shuffleCards[i].transform.DOMove(cardPositions[posIndex], shuffleMoveTime);
             cardPositions.RemoveAt(posIndex);
 
             yield return new WaitForSeconds(shuffleDelay); 
@@ -252,6 +261,9 @@ public class GameController : MonoBehaviour
             audioSource.clip = audioCorrect;
             audioSource.Play();
 
+            searchSprite = allCards[Random.Range(0, allCards.Count)].CardFront;
+            searchImg.sprite = searchSprite;
+
             if (winCount >= allCards.Count)
             {
                 recordsManager.SetRecord(gameManager.Dificulty, timer);
@@ -268,5 +280,7 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         card.ChangeSprite(true, true);
+        audioSource.clip = audioIncorrect;
+        audioSource.Play();
     }
 }
