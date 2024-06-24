@@ -24,8 +24,19 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
         }
     }
 
+    private void OnEnable()
+    {
+        _instance = this;
+    }
+
+    private void OnDisable()
+    {
+        _instance = null;
+    }
+
     private void Awake()
     {
+        InitializePurchasing();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -35,7 +46,10 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
             return;
 
         var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-        builder.AddProduct("premium", ProductType.NonConsumable);
+        builder.AddProduct("skin_1", ProductType.NonConsumable);
+        builder.AddProduct("skin_2", ProductType.NonConsumable);
+        builder.AddProduct("location_1", ProductType.NonConsumable);
+        builder.AddProduct("location_2", ProductType.NonConsumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
@@ -60,12 +74,21 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
     {
         switch (args.purchasedProduct.definition.id)
         {
-            case "premium":
-                Debug.Log("premium successfully purchased!");
+            case "skin_1":
                 PokupkaChoPoChem.Instance.ShowSuccess();
-                PlayerPrefs.SetInt("PremiumIsPurchased", 1);
-                //PhenixsMenedjer.Instance.DobavPhenixov(10);
-                //PremiumEkran.Instance.ShowChtoNado();
+                PlayerPrefs.SetInt("skin_1", 1);
+                break;
+            case "skin_2":
+                PokupkaChoPoChem.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("skin_2", 1);
+                break;
+            case "location_1":
+                PokupkaChoPoChem.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("location_1", 1);
+                break;
+            case "location_2":
+                PokupkaChoPoChem.Instance.ShowSuccess();
+                PlayerPrefs.SetInt("location_2", 1);
                 break;
             default:
                 Debug.Log($"Unexpected product ID: {args.purchasedProduct.definition.id}");

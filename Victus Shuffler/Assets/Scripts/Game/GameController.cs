@@ -8,7 +8,7 @@ using Zenject;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private Sprite defaultCardIcon;
+    [SerializeField] private Sprite[] bgSkins;
     [SerializeField] private List<Sprite> allCardIcons;
 
     [Space]
@@ -152,7 +152,7 @@ public class GameController : MonoBehaviour
         for (int i = 0; i < cardsCount; i++)
         {
             UIGameCard newCard = Instantiate(cardPrefab, cardsContent);
-            newCard.SetBG(defaultCardIcon);
+            newCard.SetBG(bgSkins[PlayerPrefs.GetInt("equip_skin", 0)]);
             Sprite cardFront = allCardIcons[Random.Range(0, allCardIcons.Count)];
             newCard.SetFront(cardFront);
             allCardIcons.Remove(cardFront);
@@ -217,6 +217,9 @@ public class GameController : MonoBehaviour
         {
             shuffleCards.RemoveAt(Random.Range(0, shuffleCards.Count));
         }
+
+        audioSource.clip = audioStart;
+        audioSource.Play();
 
         foreach (UIGameCard card in shuffleCards)
         {

@@ -554,6 +554,7 @@ GameObject:
   - component: {fileID: 947248407837482714}
   - component: {fileID: 269050530149345116}
   - component: {fileID: 1662092269587543730}
+  - component: {fileID: 1782873340185510400}
   m_Layer: 0
   m_Name: Locations Shop Item
   m_TagString: Untagged
@@ -706,3 +707,21 @@ MonoBehaviour:
     OnFinished:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &1782873340185510400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6460716724435222566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec554e5cfe3e7fc48ad69fab61c6097a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buyBtn: {fileID: 7897431646204996872}
+  equipBtn: {fileID: 6356110847178069020}
+  equipedIcon: {fileID: 4271637570188996032}
+  productID: 
+  equipID: equip_location
+  equipIndex: 0

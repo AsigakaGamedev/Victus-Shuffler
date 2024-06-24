@@ -284,6 +284,7 @@ GameObject:
   - component: {fileID: 803402427042367855}
   - component: {fileID: 1879185248839231939}
   - component: {fileID: 1636130171807877096}
+  - component: {fileID: 8828971180333965205}
   m_Layer: 0
   m_Name: Skins Shop Item
   m_TagString: Untagged
@@ -436,6 +437,24 @@ MonoBehaviour:
     OnFinished:
       m_PersistentCalls:
         m_Calls: []
+--- !u!114 &8828971180333965205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5858937789002170515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec554e5cfe3e7fc48ad69fab61c6097a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buyBtn: {fileID: 3683599300651484251}
+  equipBtn: {fileID: 8378602339186604583}
+  equipedIcon: {fileID: 244721138284392589}
+  productID: 
+  equipID: equip_skin
+  equipIndex: 0
 --- !u!1 &6883508468037796757
 GameObject:
   m_ObjectHideFlags: 0
