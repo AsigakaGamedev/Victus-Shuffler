@@ -3367,6 +3367,7 @@ MonoBehaviour:
   audioWin: {fileID: 8300000, guid: 7f059437fadb8ef478028392c704d81d, type: 3}
   audioLose: {fileID: 8300000, guid: beeaff55a1897de44b413c2588efa284, type: 3}
   audioStart: {fileID: 8300000, guid: 5699e7481f8fa5e4b887f9c6783544e5, type: 3}
+  audioShuffle: {fileID: 8300000, guid: ba7c2df5805555b4d86dcfba3d77e7c4, type: 3}
 --- !u!4 &847718451
 Transform:
   m_ObjectHideFlags: 0

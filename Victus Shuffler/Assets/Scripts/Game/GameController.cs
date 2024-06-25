@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private AudioClip audioWin;
     [SerializeField] private AudioClip audioLose;
     [SerializeField] private AudioClip audioStart;
+    [SerializeField] private AudioClip audioShuffle;
 
     private GameManager gameManager;
     private RecordsManager recordsManager;
@@ -177,6 +178,10 @@ public class GameController : MonoBehaviour
         foreach (UIGameCard card in allCards)
         {
             card.ChangeSprite(true, true);
+
+            audioSource.clip = audioShuffle;
+            audioSource.Play();
+
             yield return new WaitForSeconds(cardSpawnDelay);
         }
 
@@ -227,6 +232,9 @@ public class GameController : MonoBehaviour
 
             card.ChangeSprite(true, false);
             cardPositions.Add(card.transform.position);
+
+            audioSource.clip = audioShuffle;
+            audioSource.Play();
 
             yield return new WaitForSeconds(cardSpawnDelay);
         }
