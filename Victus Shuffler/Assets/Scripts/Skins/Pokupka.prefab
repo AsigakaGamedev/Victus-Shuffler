@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 870220470805781548}
   - component: {fileID: 1723119863761569576}
-  - component: {fileID: 7622421781289086608}
+  - component: {fileID: 2862958522017599860}
   m_Layer: 0
   m_Name: Pokupka
   m_TagString: Untagged
@@ -46,7 +46,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245817602246927897}
   m_CullTransparentMesh: 1
---- !u!114 &7622421781289086608
+--- !u!114 &2862958522017599860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,11 +55,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1245817602246927897}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 861d3b695afb4d74faf7278062cab2f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 737bfa6e6dfb51f44bb613b069c8ab2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _closeDelay: 2
-  _longCloseDelay: 45
+  _longCloseDelay: 25
   _loadingTextGO: {fileID: 2352437561065903195}
   _successTextGO: {fileID: 2095162484753017399}
   _failedTextGO: {fileID: 2621617436541566610}

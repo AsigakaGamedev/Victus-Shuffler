@@ -8,6 +8,7 @@ using Zenject;
 public class UIDificultySelect : MonoBehaviour
 {
     [SerializeField] private GameDificulty dificulty;
+    [SerializeField] private bool withShuffle;
     [SerializeField] private Button button;
 
     private GameManager gameManager;
@@ -23,6 +24,7 @@ public class UIDificultySelect : MonoBehaviour
         button.onClick.AddListener(() =>
         {
             gameManager.Dificulty = dificulty;
+            gameManager.WithShuffle = withShuffle;
             SceneManager.LoadScene(1);
         });
     }

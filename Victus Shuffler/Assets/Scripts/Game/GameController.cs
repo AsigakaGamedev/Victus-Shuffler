@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     [SerializeField] private List<Sprite> allCardIcons;
 
     [Space]
+    [SerializeField] private GameObject shuffleParent;
     [SerializeField] private TextMeshProUGUI shuffleTimer;
     [SerializeField] private TextMeshProUGUI timeTimer;
     [SerializeField] private GameObject rememberObj;
@@ -25,8 +26,9 @@ public class GameController : MonoBehaviour
     [Space]
     [SerializeField] private float cardSpawnDelay = 0.2f;
     [SerializeField] private UIGameCard cardPrefab;
-    [SerializeField] private Transform cardsContent;
-    [SerializeField] private GridLayoutGroup grid;
+    [SerializeField] private Transform cardsContent12;
+    [SerializeField] private Transform cardsContent15;
+    [SerializeField] private Transform cardsContent18;
 
     [Header("Shuffle")]
     [SerializeField] private float shuffleMoveTime = 1f;
@@ -112,6 +114,8 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        shuffleParent.SetActive(gameManager.WithShuffle);
+
         audioSource.clip = audioStart;
         audioSource.Play();
 
@@ -142,12 +146,13 @@ public class GameController : MonoBehaviour
         searchImg.gameObject.SetActive(false);
 
         int cardsCount = 0;
+        Transform cardsContent = null;
 
         switch (gameManager.Dificulty)
         {
-            case GameDificulty.Begginer: cardsCount = 12; break;
-            case GameDificulty.Advanced: cardsCount = 15; break;
-            case GameDificulty.Pro: cardsCount = 18; break;
+            case GameDificulty.Begginer: cardsCount = 12; cardsContent = cardsContent12; break;
+            case GameDificulty.Advanced: cardsCount = 15; cardsContent = cardsContent15; break;
+            case GameDificulty.Pro: cardsCount = 18; cardsContent = cardsContent18; break;
         }
 
         for (int i = 0; i < cardsCount; i++)
@@ -167,7 +172,7 @@ public class GameController : MonoBehaviour
 
         shuffleTimer.text = $"SHUFFLE IN: {0}";
         yield return new WaitForSeconds(1);
-        grid.enabled = false;
+        cardsContent.GetComponent<GridLayoutGroup>().enabled = false;
 
         for (int i = 10; i >= 0; i--)
         {
@@ -190,7 +195,10 @@ public class GameController : MonoBehaviour
         searchImg.gameObject.SetActive(true);
 
         rememberObj.SetActive(false);
-        StartCoroutine(EShuffle());
+        if (gameManager.WithShuffle)
+        {
+            StartCoroutine(EShuffle());
+        }
         StartCoroutine(EStartTimer());
     }
 

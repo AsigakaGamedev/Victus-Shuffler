@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PokupkaChoPoChem : MonoBehaviour
+public class InterfaysSPokupkoy : MonoBehaviour
 {
-    public static PokupkaChoPoChem Instance { get; private set; }
+    public static InterfaysSPokupkoy Instance { get; private set; }
 
     [SerializeField]
     private float _closeDelay = 2f;

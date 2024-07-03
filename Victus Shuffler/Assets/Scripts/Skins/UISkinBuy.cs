@@ -45,26 +45,26 @@ public class UISkinBuy : MonoBehaviour
 
     private void TryBuyProduct(string stringId)
     {
-        if (!PurchaseManager.Instance.IsInitialized())
+        if (!CkiniShopManager.Instance.IsInitialized())
         {
             Debug.Log("IAP is not initialized.");
-            PokupkaChoPoChem.Instance.ShowFailed();
+            InterfaysSPokupkoy.Instance.ShowFailed();
             return;
         }
 
-        Product product = PurchaseManager.Instance._storeController.products.WithID(stringId);
+        Product product = CkiniShopManager.Instance._storeController.products.WithID(stringId);
 
-        PokupkaChoPoChem.Instance.ShowLoading();
+        InterfaysSPokupkoy.Instance.ShowLoading();
 
         if (product != null && product.availableToPurchase)
         {
             Debug.Log($"Purchasing product asynchronously: '{product.definition.id}'");
-            PurchaseManager.Instance._storeController.InitiatePurchase(product);
+            CkiniShopManager.Instance._storeController.InitiatePurchase(product);
         }
         else
         {
             Debug.Log($"Could not initiate purchase for product ID: {stringId}. It might not be available for purchase.");
-            PokupkaChoPoChem.Instance.ShowFailed();
+            InterfaysSPokupkoy.Instance.ShowFailed();
         }
     }
 }

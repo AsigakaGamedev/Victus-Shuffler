@@ -1,16 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 
-public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
+public class CkiniShopManager : MonoBehaviour, IDetailedStoreListener
 {
-    private static PurchaseManager _instance;
+    private static CkiniShopManager _instance;
     public IStoreController _storeController;
     private IExtensionProvider _storeExtensionProvider;
 
-    public static PurchaseManager Instance
+    public static CkiniShopManager Instance
     {
         get
         {
@@ -18,7 +19,7 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
             {
                 GameObject iapManager = new GameObject("PurchaseManager");
                 DontDestroyOnLoad(iapManager);
-                _instance = iapManager.AddComponent<PurchaseManager>();
+                _instance = iapManager.AddComponent<CkiniShopManager>();
             }
             return _instance;
         }
@@ -34,7 +35,7 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
         _instance = null;
     }
 
-    private void Awake()
+    private void Start()
     {
         InitializePurchasing();
         DontDestroyOnLoad(gameObject);
@@ -75,24 +76,24 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
         switch (args.purchasedProduct.definition.id)
         {
             case "skin_1":
-                PokupkaChoPoChem.Instance.ShowSuccess();
+                InterfaysSPokupkoy.Instance.ShowSuccess();
                 PlayerPrefs.SetInt("skin_1", 1);
                 break;
             case "skin_2":
-                PokupkaChoPoChem.Instance.ShowSuccess();
+                InterfaysSPokupkoy.Instance.ShowSuccess();
                 PlayerPrefs.SetInt("skin_2", 1);
                 break;
             case "location_1":
-                PokupkaChoPoChem.Instance.ShowSuccess();
+                InterfaysSPokupkoy.Instance.ShowSuccess();
                 PlayerPrefs.SetInt("location_1", 1);
                 break;
             case "location_2":
-                PokupkaChoPoChem.Instance.ShowSuccess();
+                InterfaysSPokupkoy.Instance.ShowSuccess();
                 PlayerPrefs.SetInt("location_2", 1);
                 break;
             default:
                 Debug.Log($"Unexpected product ID: {args.purchasedProduct.definition.id}");
-                PokupkaChoPoChem.Instance.ShowFailed();
+                InterfaysSPokupkoy.Instance.ShowFailed();
                 break;
         }
         return PurchaseProcessingResult.Complete;
@@ -100,7 +101,7 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
 
     public void OnPurchaseFailed(Product product, PurchaseFailureReason failureReason)
     {
-        PokupkaChoPoChem.Instance.ShowFailed();
+        InterfaysSPokupkoy.Instance.ShowFailed();
         Debug.Log($"Purchase of {product.definition.id} failed due to {failureReason}");
     }
 
@@ -138,7 +139,7 @@ public class PurchaseManager : MonoBehaviour, IDetailedStoreListener
 
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
     {
-        PokupkaChoPoChem.Instance.ShowFailed();
+        InterfaysSPokupkoy.Instance.ShowFailed();
         Debug.Log($"Purchase of {product.definition.id} failed due to {failureDescription}");
     }
 }

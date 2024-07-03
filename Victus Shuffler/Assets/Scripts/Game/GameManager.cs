@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     [Space]
     [SerializeField] private GameDificulty dificulty;
+    [SerializeField] private bool withShuffle;
 
     public GameDificulty Dificulty { get => dificulty; set => dificulty = value; }
+    public bool WithShuffle { get => withShuffle; set => withShuffle = value; }
 }
