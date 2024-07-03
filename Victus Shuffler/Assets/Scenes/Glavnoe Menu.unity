@@ -4442,7 +4442,7 @@ PrefabInstance:
     - target: {fileID: 2642090955532138546, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8ea55a88ba526d24385edb60413d86d3, type: 3}
+      objectReference: {fileID: 21300000, guid: 983d32cff20e6dd40aea11bc12e10ccc, type: 3}
     - target: {fileID: 5313313479401023581, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
       propertyPath: m_Name
       value: Record Item (1)
@@ -8564,6 +8564,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1069026811}
     m_Modifications:
+    - target: {fileID: 2642090955532138546, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c5ed45a5541425c46b1415387c4634d7, type: 3}
     - target: {fileID: 5313313479401023581, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
       propertyPath: m_Name
       value: Record Item (3)
@@ -10179,6 +10183,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1069026811}
     m_Modifications:
+    - target: {fileID: 2642090955532138546, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 203cde818ff1a69418b071df315dc4a1, type: 3}
     - target: {fileID: 5313313479401023581, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
       propertyPath: m_Name
       value: Record Item
@@ -15357,7 +15365,7 @@ PrefabInstance:
     - target: {fileID: 2642090955532138546, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fe4759d8ab5ca114bbcc1e2f06135de4, type: 3}
+      objectReference: {fileID: 21300000, guid: 66c41d8df623c6745a142fe325191a86, type: 3}
     - target: {fileID: 5313313479401023581, guid: a5a4e00e8db26964cb673663cb670031, type: 3}
       propertyPath: m_Name
       value: Record Item (2)
