@@ -60,6 +60,8 @@ public class InterfaysSPokupkoy : MonoBehaviour
 
     public void ClosePanel(float delay)
     {
+        MagazinManeger.Instance.UpdateMagazin();
+
         if (_currentCloseWaitCoroutine != null) StopCoroutine(_currentCloseWaitCoroutine);
         _currentCloseWaitCoroutine = StartCoroutine(CloseWaiterByTime(delay));
     }

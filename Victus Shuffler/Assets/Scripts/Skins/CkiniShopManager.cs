@@ -96,6 +96,7 @@ public class CkiniShopManager : MonoBehaviour, IDetailedStoreListener
                 InterfaysSPokupkoy.Instance.ShowFailed();
                 break;
         }
+
         return PurchaseProcessingResult.Complete;
     }
 
@@ -135,6 +136,8 @@ public class CkiniShopManager : MonoBehaviour, IDetailedStoreListener
         {
             Debug.Log("Restore purchases is not supported on this platform.");
         }
+
+        MagazinManeger.Instance.UpdateMagazin();
     }
 
     public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)

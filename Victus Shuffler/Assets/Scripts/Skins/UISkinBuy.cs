@@ -15,6 +15,8 @@ public class UISkinBuy : MonoBehaviour
     [SerializeField] private string equipID = "equip_skin";
     [SerializeField] private int equipIndex;
 
+    MagazinManeger magazin;
+
     private void Start()
     {
         PlayerPrefs.SetInt("skin_0", 1);
@@ -34,12 +36,17 @@ public class UISkinBuy : MonoBehaviour
         });
     }
 
+    private void Update()
+    {
+        CheckIsBuyed();
+    }
+
     private void CheckIsBuyed()
     {
         bool isBuyed = PlayerPrefs.GetInt(productID, 0) == 1;
 
         buyBtn.gameObject.SetActive(!isBuyed);
-        equipBtn.gameObject.SetActive(isBuyed);
+        equipBtn.gameObject.SetActive(isBuyed && PlayerPrefs.GetInt(equipID, 0) != equipIndex);
         equipedIcon.SetActive(isBuyed && PlayerPrefs.GetInt(equipID, 0) == equipIndex);
     }
 
